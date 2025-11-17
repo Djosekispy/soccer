@@ -42,10 +42,12 @@ const styles = StyleSheet.create({
   textButton : {
     fontWeight : "bold",
     fontSize : 14,
-    color : "#fff"
+    color : "#fff",
+    fontFamily : "Irish-Grover"
   },
   text : {
     color: "#000000",
+    fontFamily : "Irish-Grover"
   }
 })
 
