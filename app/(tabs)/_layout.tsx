@@ -10,6 +10,14 @@ export default function LayoutTabs (){
       headerShown : false,
       tabBarActiveTintColor : "#F63D68",
       tabBarInactiveTintColor : "#667085",
+      tabBarStyle : {
+        backgroundColor : "#1E1E1E",
+        borderTopWidth : 0,
+      },
+      tabBarLabelStyle : {
+        fontFamily : "Irish-Grover",
+        fontSize : 12
+      }
     }}
     >
       <Tabs.Screen 

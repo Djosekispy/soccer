@@ -2,8 +2,10 @@
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -27,10 +29,12 @@ export default function RootLayout() {
 function RootLayoutNav() {
 
   return (
-   
+     <SafeAreaView style={{ flex: 1 }}>
+      <StatusBar style='light' backgroundColor='#161616' />
       <Stack>
          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
+      </SafeAreaView>
   );
 }

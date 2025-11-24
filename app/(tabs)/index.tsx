@@ -1,25 +1,23 @@
-import { styles } from "@/styles/mainViewStyle";
-import { Link } from "expo-router";
-import { useState } from "react";
-import { Text, View } from "react-native";
+import logo from "@/assets/images/logo.png";
+import CalenderCarousel from "@/components/calender/calenderCarousel";
+import IndexStyles from "@/styles/home-index/styles";
+import { Ionicons } from "@expo/vector-icons";
+import { Image, View } from "react-native";
 
-const loginIcon = require('../../assets/images/loginIcon.png')
 
 export default function IndexPage(){
 
-  const [ email, setEmail ] = useState<string>()
-
-const onSubmit = ()=> {
-  alert(email)
-}
 
   return (
-   <View style={styles.main} >
-    <Text>SEJA BEM VINDO</Text>
-    
-      <Link href={"/(auth)"}>
-        <Text>Voltar ao Login</Text>
-      </Link>
+   <View style={IndexStyles.container}>
+   <View style={IndexStyles.header}>
+    <Image source={logo} />
+      <View style={IndexStyles.iconContent}>
+     <Ionicons name="search-outline" size={24} color="#fff" />
+     <Ionicons name="notifications-outline" size={24} color="#fff" />
+      </View>
+   </View>
+   <CalenderCarousel />
   </View>
   );
 }
