@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     marginBottom : 12
   },
   button : {
-    backgroundColor : "#000000",
+    backgroundColor : "#E93B3B",
     padding : 10,
     width : 100,
     borderRadius : 12,
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     fontFamily : "Irish-Grover"
   },
   text : {
-    color: "#000000",
+    color: "#fff",
     fontFamily : "Irish-Grover"
   }
 })

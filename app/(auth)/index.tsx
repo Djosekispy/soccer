@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Image, Text, TextInput, View } from "react-native";
 
-const loginIcon = require('../../assets/images/loginIcon.png')
+const loginIcon = require('../../assets/images/Profile.png')
 
 export default function IndexPage(){
  const router = useRouter();
@@ -20,7 +20,7 @@ const onSubmit = ()=> {
       <Image  source={loginIcon} style={styles.image}/>
     </View>
 
-    <Text>SEJA BEM VINDO</Text>
+    <Text style={styles.text}>SEJA BEM VINDO</Text>
 
    <View style={styles.form}>
     <View style={[styles.form, { gap : 8}]}>

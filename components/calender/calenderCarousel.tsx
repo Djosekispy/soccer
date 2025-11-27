@@ -1,31 +1,41 @@
-import { Ionicons } from "@expo/vector-icons";
 import dayjs, { Dayjs } from "dayjs";
 import { useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { FlatList, View } from "react-native";
 import CalenderStyles from "./style";
-
+import CarouselButton from "./ui/CarrouselButton";
+import RenderItem from "./ui/ItemRender";
 
 export default function CalenderCarousel(){
   const [currentDate, setCurrentDate ] = useState<Dayjs>(dayjs())
   const [selectedDate, setSelectedDate ] = useState<Dayjs>(dayjs())
     
-  const renderItem = ({item } : { item : Dayjs})=>{
+  const getDayOfWeek = ()=> {
+    const startOfWeek = currentDate.startOf("week")
+    return Array.from({length : 7}, (_,i) => startOfWeek.add(i,"day") );
+  }
 
-    const isToday = 
-    }
-    
-    
+  const dates = getDayOfWeek();
+
+  const goPrevWeek = ()=> setCurrentDate((prev) => prev.subtract(1,"week"));
+   const goNextWeek = ()=> setCurrentDate((prev) => prev.add(1,"week"));
+
     return (
    <View style={CalenderStyles.container}>
-    <TouchableOpacity>
-  <Ionicons name="chevron-back" size={24} color="#fff"/>
-    </TouchableOpacity>
 
+  <CarouselButton iconName="chevron-back" onPress={goPrevWeek} />
+    <FlatList 
+    data={dates}
+    keyExtractor={(item)=> item.format("DD-MM-YYYY")}
+    renderItem={({item,index})=><RenderItem 
+    key={index} item={item} 
+    selectedDate={selectedDate} 
+    setSelectedDate={setSelectedDate}/>}
+    horizontal
+    showsHorizontalScrollIndicator={false}
+    contentContainerStyle={{gap: 20}}
+    />
 
-
-       <TouchableOpacity>
-         <Ionicons name="chevron-forward" size={24} color="#fff"/>
-    </TouchableOpacity>
+         <CarouselButton iconName="chevron-forward" onPress={goNextWeek} />
     </View>
 
     );
