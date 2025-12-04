@@ -2,11 +2,9 @@ import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { Match } from "./data/matches";
 
-interface Props {
-  data: Match;
-}
 
-export const MatchCard = ({ data } : Props) => {
+
+export const MatchCard = ({ awayLogo,awayTeam,homeLogo,homeTeam,id,league,leagueFlag,scoreAway,scoreHome,time} : Match) => {
   return (
     <View
       style={{
@@ -20,10 +18,10 @@ export const MatchCard = ({ data } : Props) => {
       {/* Header - Liga e bandeira */}
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Image
-          source={{ uri: data.leagueFlag }}
+          source={{ uri: leagueFlag }}
           style={{ width: 20, height: 20, marginRight: 8 }}
         />
-        <Text style={{  fontFamily:"Irish-Grover", color: "#ccc", fontSize: 12 }}>{data.league}</Text>
+        <Text style={{  fontFamily:"Irish-Grover", color: "#ccc", fontSize: 12 }}>{league}</Text>
 
         <View
           style={{
@@ -34,7 +32,7 @@ export const MatchCard = ({ data } : Props) => {
             borderRadius: 12,
           }}
         >
-          <Text style={{  fontFamily:"Irish-Grover", color: "#2EAD2E", fontSize: 12 }}>{data.time}</Text>
+          <Text style={{  fontFamily:"Irish-Grover", color: "#2EAD2E", fontSize: 12 }}>{time}</Text>
         </View>
       </View>
 
@@ -50,27 +48,27 @@ export const MatchCard = ({ data } : Props) => {
         {/* Home */}
         <View style={{ alignItems: "center", width: "35%" }}>
           <Image
-            source={{ uri: data.homeLogo }}
+            source={{ uri: homeLogo }}
             style={{ width: 38, height: 38, marginBottom: 6 }}
           />
           <Text style={{  fontFamily:"Irish-Grover", color: "#fff", fontSize: 12, textAlign: "center" }}>
-            {data.homeTeam}
+            {homeTeam}
           </Text>
         </View>
 
         {/* Score */}
         <Text style={{  fontFamily:"Irish-Grover", color: "#fff", fontSize: 20 }}>
-          {data.scoreHome} - {data.scoreAway}
+          {scoreHome} - {scoreAway}
         </Text>
 
         {/* Away */}
         <View style={{ alignItems: "center", width: "35%" }}>
           <Image
-            source={{ uri: data.awayLogo }}
+            source={{ uri: awayLogo }}
             style={{ width: 38, height: 38, marginBottom: 6 }}
           />
           <Text style={{  fontFamily:"Irish-Grover", color: "#fff", fontSize: 12, textAlign: "center" }}>
-            {data.awayTeam}
+            {awayTeam}
           </Text>
         </View>
       </View>

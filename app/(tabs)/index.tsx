@@ -3,10 +3,13 @@ import CalenderCarousel from "@/components/calender/calenderCarousel";
 import MatchesCarousel from "@/components/matches/MatchesCarousel";
 import IndexStyles from "@/styles/home-index/styles";
 import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
 
 export default function IndexPage(){
+
+ const [macthDate, setMatchDate] = useState<Date>(new Date());
 
 
   return (
@@ -18,7 +21,7 @@ export default function IndexPage(){
      <Ionicons name="notifications-outline" size={24} color="#fff" />
       </View>
    </View>
-   <CalenderCarousel />
+   <CalenderCarousel setMatchDate={setMatchDate} />
     <View style={{width: "100%", flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 20, paddingHorizontal: 14}}>
       <TouchableOpacity>
       <Text style={{fontWeight: "700", fontSize: 18, fontFamily:"Irish-Grover", color:"#fff"}}>Live Now</Text>
@@ -28,7 +31,7 @@ export default function IndexPage(){
       </TouchableOpacity>
       
     </View>
-     <MatchesCarousel />
+     <MatchesCarousel macthDate={macthDate} />
   </View>
   );
 }

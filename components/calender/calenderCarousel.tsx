@@ -5,9 +5,17 @@ import CalenderStyles from "./style";
 import CarouselButton from "./ui/CarrouselButton";
 import RenderItem from "./ui/ItemRender";
 
-export default function CalenderCarousel(){
+interface Props {
+  setMatchDate: (date: Date) => void;
+}
+export default function CalenderCarousel({setMatchDate }: Props){
   const [currentDate, setCurrentDate ] = useState<Dayjs>(dayjs())
   const [selectedDate, setSelectedDate ] = useState<Dayjs>(dayjs())
+
+   const handleDateChange = (date: Dayjs) => {
+    setSelectedDate(date);
+    setMatchDate(date.toDate());
+   }
     
   const getDayOfWeek = ()=> {
     const startOfWeek = currentDate.startOf("week")
@@ -29,7 +37,7 @@ export default function CalenderCarousel(){
     renderItem={({item,index})=><RenderItem 
     key={index} item={item} 
     selectedDate={selectedDate} 
-    setSelectedDate={setSelectedDate}/>}
+    setSelectedDate={handleDateChange}/>}
     horizontal
     showsHorizontalScrollIndicator={false}
     contentContainerStyle={{gap: 20}}
