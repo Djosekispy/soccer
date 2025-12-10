@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
+    "@react-native-picker/picker": "2.11.1",
     "@react-navigation/native": "^7.1.8",
     "axios": "^1.13.2",
     "dayjs": "^1.11.19",

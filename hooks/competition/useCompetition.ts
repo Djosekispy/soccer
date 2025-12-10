@@ -1,37 +1,45 @@
 import ApiRequest from "@/config/axiosConfig";
 import { useEffect, useState } from "react";
-import { ICompetition, IScoreResponse } from "./ICompetition";
+import { Competition, ICompetition, IScoreResponse } from "./ICompetition";
 
 
 function useCompetition() : ICompetition {
         const isLoading: boolean = false;
         const [ score, setScore ] = useState<IScoreResponse[]>([]);
-        const standing: any = {};
-        const competitions: any[] = [];
+        const [competitions, setCompetition ] = useState<Competition[]>([])
+        const [competitionId, setCompetionId ] = useState<string | number>(2021)
+        const [standing, setStanding ] = useState<any>([])
+        
 
     const fetchAllCompetitions = async () => {
         try {
             const response = await ApiRequest.get('/competitions');
             await fetchScoreCompetitionById();
-            console.log(JSON.stringify(response.data));
+            setCompetition(response.data.competitions);
         } catch (error) {
         console.log("Error fetching competitions:", error);
         }
     }
-    const fetchScoreCompetitionById = async (id = 2021) => {
+    const fetchScoreCompetitionById = async () => {
         try {
-            const response = await ApiRequest.get(`/competitions/${id}/scorers`);
+            const response = await ApiRequest.get(`/competitions/${competitionId}/scorers`);
             setScore(response.data.scorers);
         } catch (error) {
             console.log("Error fetching score competition by ID:", error);
         }
     }
-    const fetchCompetitionByName = async (name: string) => {
-        // Implementation here
-    }
     const fetchCompetitionById = async (id: number) => {
-        // Implementation here
+         try {
+            const response = await ApiRequest.get(`/competitions/${competitionId}`);
+            setScore(response.data.scorers);
+        } catch (error) {
+            console.log("Error fetching score competition by ID:", error);
+        }
     }
+
+    useEffect(() => {
+        fetchScoreCompetitionById();
+    }, [competitionId]);
 
     useEffect(() => {
         fetchAllCompetitions();
@@ -41,11 +49,12 @@ function useCompetition() : ICompetition {
     return {
         fetchAllCompetitions,
         competitions,
-        fetchCompetitionByName, 
         fetchCompetitionById,
         isLoading,
         score,
         standing,
+        competitionId,
+        setCompetionId,
         fetchScoreCompetitionById
     };
 }

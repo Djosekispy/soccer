@@ -7,7 +7,8 @@ import useCompetition from "@/hooks/competition/useCompetition";
 import useMatches from "@/hooks/matches/useMatches";
 import IndexStyles from "@/styles/home-index/styles";
 import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
+import { Picker } from '@react-native-picker/picker';
+import React, { useRef, useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 enum tabsEmun {
@@ -18,9 +19,13 @@ enum tabsEmun {
 
 export default function IndexPage(){
  const { fetchAllMatches,fetchMatchByDate,fetchMatchLive,isLoading,matches,upcomingMatches } = useMatches();
- const { competitions,fetchAllCompetitions,fetchCompetitionById,fetchCompetitionByName,fetchScoreCompetitionById,score,standing } = useCompetition();
+ const {competitionId,setCompetionId, competitions,fetchAllCompetitions,fetchCompetitionById,fetchScoreCompetitionById,score,standing } = useCompetition();
  const [tab, setTabs] = useState<tabsEmun>(tabsEmun.upcoming);
+ const pickerRef = useRef<any>(null);
 
+ const close = ()=>{
+  pickerRef.current.blur();
+}
 
   return (
    <View style={IndexStyles.container}>
@@ -57,6 +62,59 @@ export default function IndexPage(){
         <Text style={{color :  tabsEmun.favorites == tab ? "#fff" : "#5D5C64",fontFamily:"Irish-Grover"}}>Favorites</Text>
       </TouchableOpacity>
      </View>
+
+         <View style={{ flexDirection: "row", alignItems: "center" , width:"100%", paddingHorizontal: 14, marginVertical: 10}}>
+              <Image
+                source={{ uri: upcomingMatches && upcomingMatches[0]?.competition.emblem }} 
+                style={{ width: 30, height: 30, marginRight: 8 }}
+              />
+              <Text style={{  fontFamily:"Irish-Grover", color: "#ccc", fontSize: 14 }}>{upcomingMatches && upcomingMatches[0]?.competition.name}</Text>
+      
+              <View
+                style={{
+                  marginLeft: "auto",
+                  paddingHorizontal: 8,
+                  paddingVertical: 2,
+                }}
+              >
+             <Picker 
+            mode="dialog"
+            dropdownIconColor="#fff"
+            selectionColor="#5D5C64"
+            style={{
+              width: 20,
+              height: 20,
+              backgroundColor: "transparent",
+              borderRadius: 10,
+              paddingHorizontal: 8,
+              borderWidth: 1,
+              borderColor: "#E0E0E0",
+              justifyContent: "center",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.08,
+              shadowRadius: 4,
+              elevation: 2, 
+            }}
+      selectedValue={setCompetionId}
+      onValueChange={(itemValue) =>{
+        setCompetionId(itemValue as any)
+      }
+      }
+    >
+  {competitions.length > 0 &&
+    competitions.map((item, index) => (
+      <Picker.Item
+      color={(competitionId == item.id) || (competitionId == item.code) ? "#111" : "#5D5C64"}
+        key={index}
+        label={item.name}
+        value={item.code || item.id}
+      />
+    ))}
+</Picker>
+
+                   </View>
+            </View>
 
      {tab == tabsEmun.upcoming && <UpcomingCarousel matches={upcomingMatches} />}
       {tab == tabsEmun.score && <ScoreCarousel Scores={score} />}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { ApiResponse } from "./data/matches";
 import { UpcomingCard } from "./upcomingCard";
 
@@ -12,25 +12,8 @@ export default function UpcomingCarousel({matches }:Props) {
 
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 20 , width: "100%", paddingHorizontal: 14, flex:1}}>
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
-         <Image
-           source={{ uri: matches && matches[0]?.competition.emblem }} 
-           style={{ width: 20, height: 20, marginRight: 8 }}
-         />
-         <Text style={{  fontFamily:"Irish-Grover", color: "#ccc", fontSize: 12 }}>{matches && matches[0]?.competition.name}</Text>
- 
-         <View
-           style={{
-             marginLeft: "auto",
-             backgroundColor: "#E8FFE8",
-             paddingHorizontal: 8,
-             paddingVertical: 2,
-             borderRadius: 12,
-           }}
-         >
-              </View>
-       </View>
+    <ScrollView showsVerticalScrollIndicator={false} style={{width: "100%", paddingHorizontal: 14, flex:1}}>
+
       {
         matches && matches.length === 0 ? (
           <View style={{flex:1, justifyContent:"center", alignItems:"center", height:100, width:400}}> 
