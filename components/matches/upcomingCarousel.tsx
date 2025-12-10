@@ -17,7 +17,7 @@ export default function UpcomingCarousel({matches }:Props) {
       {
         matches && matches.length === 0 ? (
           <View style={{flex:1, justifyContent:"center", alignItems:"center", height:100, width:400}}> 
-           <Text style={{color : "#fff", fontSize: 25, fontWeight: "700", fontFamily:"Irish-Grover"}}>Sem Resultados !!</Text>
+           <Text style={{color : "#fff", fontSize: 18, fontWeight: "400", fontFamily:"Irish-Grover"}}>No Results</Text>
         </View>
         ) :
         (

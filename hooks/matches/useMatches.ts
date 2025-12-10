@@ -8,11 +8,12 @@ function useMatches() : IMatche {
       const [matches, setMatches] = useState<ApiResponse[]>([]); 
       const [upcomingMatches, setUpcomingMatches] = useState<ApiResponse[]>([]);
       const [isLoading, setIsLoading] = useState<boolean>(false);
+      const [competitionId, setCompetitionId ] = useState<string | number>(2021)
     
      const fetchMatchByDate = async (date = new Date)=> {
       setIsLoading(true)
       try {
-        const getMatches = await ApiRequest.get(`/competitions/2021/matches?dateFrom=${date.toISOString().split("T")[0]}&dateTo=${date.toISOString().split("T")[0]}`);
+        const getMatches = await ApiRequest.get(`/competitions/${competitionId}/matches?dateFrom=${date.toISOString().split("T")[0]}&dateTo=${date.toISOString().split("T")[0]}`);
         await fetchUpcomingMatches(date);  
         setMatches(getMatches.data.matches);
       } catch (error) {
@@ -30,7 +31,7 @@ function useMatches() : IMatche {
          endDate.setDate(endDate.getDate() + 7);
          const dateTo = endDate.toISOString().split("T")[0];
 
-        const getMatches = await ApiRequest.get(`/competitions/2021/matches?dateFrom=${dateFrom}&dateTo=${dateTo}`);
+        const getMatches = await ApiRequest.get(`/competitions/${competitionId}/matches?dateFrom=${dateFrom}&dateTo=${dateTo}`);
           setUpcomingMatches(getMatches.data.matches);
       } catch (error) {
         console.log(JSON.stringify(error));
@@ -67,6 +68,11 @@ function useMatches() : IMatche {
       fetchMatchByDate();
      },[])
 
+       useEffect(()=>{
+      fetchUpcomingMatches();
+      fetchMatchByDate();
+     },[competitionId])
+
      return {
         fetchMatchByDate,
         isLoading,
@@ -74,7 +80,8 @@ function useMatches() : IMatche {
         upcomingMatches,
         fetchMatchLive,
         fetchAllMatches,
-        fetchUpcomingMatches
+        fetchUpcomingMatches,
+        setCompetitionId
      }
 }
 

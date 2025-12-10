@@ -8,6 +8,7 @@ interface IMatche {
     fetchMatchByDate(date: Date): void;
     fetchMatchLive(): void;
     fetchAllMatches(): void;
+    setCompetitionId: (id : string | number)=>void;
 }
 
 export default IMatche;

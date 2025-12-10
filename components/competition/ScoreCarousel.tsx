@@ -17,7 +17,7 @@ export default function ScoreCarousel({Scores }:Props) {
       {
         Scores && Scores.length === 0 ? (
           <View style={{flex:1, justifyContent:"center", alignItems:"center", height:100, width:400}}> 
-           <Text style={{color : "#fff", fontSize: 14, fontWeight: "400", fontFamily:"Irish-Grover"}}>Sem Resultados !!</Text>
+           <Text style={{color : "#fff", fontSize: 14, fontWeight: "400", fontFamily:"Irish-Grover"}}>No Results !!</Text>
         </View>
         ) :
         (

@@ -18,7 +18,7 @@ enum tabsEmun {
 }
 
 export default function IndexPage(){
- const { fetchAllMatches,fetchMatchByDate,fetchMatchLive,isLoading,matches,upcomingMatches } = useMatches();
+ const { fetchAllMatches,fetchMatchByDate,setCompetitionId,fetchMatchLive,isLoading,matches,upcomingMatches } = useMatches();
  const {competitionId,setCompetionId, competitions,fetchAllCompetitions,fetchCompetitionById,fetchScoreCompetitionById,score,standing } = useCompetition();
  const [tab, setTabs] = useState<tabsEmun>(tabsEmun.upcoming);
  const pickerRef = useRef<any>(null);
@@ -82,7 +82,7 @@ export default function IndexPage(){
             dropdownIconColor="#fff"
             selectionColor="#5D5C64"
             style={{
-              width: 20,
+              width: 40,
               height: 20,
               backgroundColor: "transparent",
               borderRadius: 10,
@@ -99,6 +99,7 @@ export default function IndexPage(){
       selectedValue={setCompetionId}
       onValueChange={(itemValue) =>{
         setCompetionId(itemValue as any)
+        setCompetitionId(itemValue as any)
       }
       }
     >

@@ -15,13 +15,12 @@ export const MatchCard = ({ awayLogo,awayTeam,homeLogo,homeTeam,id,league,league
         marginHorizontal: 14,
       }}
     >
-      {/* Header - Liga e bandeira */}
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Image
           source={{ uri: leagueFlag }}
           style={{ width: 20, height: 20, marginRight: 8 }}
         />
-        <Text style={{  fontFamily:"Irish-Grover", color: "#ccc", fontSize: 12 }}>{league}</Text>
+        <Text style={{  fontFamily:"Irish-Grover", color: "#ccc", fontSize: 12 }}>{league.slice(0,14)}</Text>
 
         <View
           style={{
@@ -32,11 +31,10 @@ export const MatchCard = ({ awayLogo,awayTeam,homeLogo,homeTeam,id,league,league
             borderRadius: 12,
           }}
         >
-          <Text style={{  fontFamily:"Irish-Grover", color: "#2EAD2E", fontSize: 12 }}>{time}</Text>
+          <Text style={{  fontFamily:"Irish-Grover", color: "#2EAD2E", fontSize: 12 }}>{String(time)}</Text>
         </View>
       </View>
 
-      {/* Placar */}
       <View
         style={{
           marginTop: 18,
@@ -45,7 +43,6 @@ export const MatchCard = ({ awayLogo,awayTeam,homeLogo,homeTeam,id,league,league
           alignItems: "center",
         }}
       >
-        {/* Home */}
         <View style={{ alignItems: "center", width: "35%" }}>
           <Image
             source={{ uri: homeLogo }}
@@ -56,12 +53,10 @@ export const MatchCard = ({ awayLogo,awayTeam,homeLogo,homeTeam,id,league,league
           </Text>
         </View>
 
-        {/* Score */}
         <Text style={{  fontFamily:"Irish-Grover", color: "#fff", fontSize: 20 }}>
           {scoreHome} - {scoreAway}
         </Text>
 
-        {/* Away */}
         <View style={{ alignItems: "center", width: "35%" }}>
           <Image
             source={{ uri: awayLogo }}
